@@ -6,7 +6,7 @@
 /*   By: orhernan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 12:29:42 by orhernan          #+#    #+#             */
-/*   Updated: 2025/09/29 14:47:00 by orhernan         ###   ########.fr       */
+/*   Updated: 2025/09/29 15:43:09 by orhernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 # include <unistd.h>
 # include <stdlib.h>
 
+int	ft_isalnum(int c);
 int	ft_isalpha(int c);
+int	ft_isascii(int c);
+int	ft_isdigit(int c);
 
 #endif
