@@ -16,12 +16,10 @@ void	*memset(void *p, int c, size_t len)
 {
 	size_t	i;
 
-	if (!p)
-		return (NULL);
 	i = 0;
 	while (i < len)
 	{
-		*(unsinged char*)(p + i) = (unsigned char)c;
+		*(unsigned char*)(p + i) = (unsigned char)c;
 		i++;
 	}
 	return (p);
