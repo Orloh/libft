@@ -12,14 +12,18 @@
 
 #include "libft.h"
 
-void	*memset(void *p, int c, size_t len)
+void	*memset(void *ptr, int c, size_t n)
 {
-	size_t	i;
+	size_t			i;
+	unsigned char	*p;
 
+	if (n == 0)
+		return (p);
+	ptr = (unsigned char *)p;
 	i = 0;
-	while (i < len)
+	while (i < n)
 	{
-		*(unsigned char*)(p + i) = (unsigned char)c;
+		p[i] = (unsigned char)c;
 		i++;
 	}
 	return (p);
