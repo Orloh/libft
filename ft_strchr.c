@@ -16,14 +16,14 @@ const char	*ft_strchr(const char *s, int c)
 {
 	unsigned char	uc;
 
-	uc = (unsigned char)c
+	uc = (unsigned char)c;
 	while (*s != '\0')
 	{
-		if(*s == uc)
+		if (*s == uc)
 			return (s);
 		s++;
 	}
 	if (uc == '\0')
-		return (s;
+		return (s);
 	return (NULL);
 }
