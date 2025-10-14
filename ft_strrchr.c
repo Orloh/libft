@@ -14,8 +14,8 @@
 
 char	*ft_strrchr(const char *s, int c)
 {
+	char			*last;
 	unsigned char	uc;
-	char		*last;
 
 	uc = (unsigned char)c;
 	last = NULL;
