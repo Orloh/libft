@@ -24,10 +24,10 @@ size_t	ft_strlcat(char *dest, const char *src, size_t dstsize)
 	if (dstlen == dstsize)
 		return (dstlen + srclen);
 	if (srclen < dstsize - dstlen)
-		ft_memcpy(dst + dstlen, src, srclen + 1);
+		ft_memcpy(dest + dstlen, src, srclen + 1);
 	else
 	{
-		ft_memcpy(dst + dstlen, src, dstsize - dstlen -1);
+		ft_memcpy(dest + dstlen, src, dstsize - dstlen -1);
 		dest[dstsize - 1] = '\0';
 	}
 	return (dstlen + srclen);
