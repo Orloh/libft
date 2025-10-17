@@ -14,7 +14,7 @@
 
 static int	ft_isspace(int c)
 {
-	return (c == 9 || c == 10 || c == 11 || c == 12 || c ==13 || c == 32);
+	return (c == 9 || c == 10 || c == 11 || c == 12 || c == 13 || c == 32);
 }
 
 int	ft_atoi(const char *str)
@@ -38,7 +38,7 @@ int	ft_atoi(const char *str)
 	while (str[i] && (str[i] >= '0') && (str[i] <='9'))
 	{
 		result *= 10;
-		result = str[i] - 48;
+		result += str[i] - 48;
 		i++;
 	}
 	result *= sign;

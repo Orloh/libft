@@ -12,10 +12,10 @@
 
 #include "libft.h"
 
-char *strdup(const char *s)
+char	*strdup(const char *s)
 {
-	char tmp;
-	int count;
+	char	tmp;
+	int	count;
 
 	count = ft_strlen(s);
 	tmp = (char *)calloc(count, sizeof char);
