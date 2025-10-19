@@ -6,7 +6,7 @@
 /*   By: orhernan <orhernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 12:29:42 by orhernan          #+#    #+#             */
-/*   Updated: 2025/10/17 21:44:57 by orhernan         ###   ########.fr       */
+/*   Updated: 2025/10/19 22:27:51 by orhernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int			ft_isalnum(int c);
 int			ft_isalpha(int c);
 int			ft_isascii(int c);
 int			ft_isdigit(int c);
+char		*ft_itoa(int n);
 int			ft_isprint(int c);
 void		*ft_memchr(const void *s, int c, size_t n);
 int			ft_memcmp(const void *s1, const void *s2, size_t n);

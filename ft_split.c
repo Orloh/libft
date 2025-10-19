@@ -14,7 +14,6 @@
 
 static int	get_word_count(const char *s, char c)
 {
-	size_t	i;
 	int		flag;
 	int		word_count;
 
@@ -48,7 +47,7 @@ static void	*free_mem(char **s, size_t n)
 	return (NULL);
 }
 
-static void	var_init(size_t *i, size_t *j, size_t *w_start);
+static void	var_init(size_t *i, int *j, int *w_start)
 {
 	*i = 0;
 	*j = 0;
@@ -59,11 +58,11 @@ char	**ft_split(const char *s, char c)
 {
 	char	**str_array;
 	size_t	i;
-	size_t	w_start;
-	size_t	j;
+	int		w_start;
+	int		j;
 
 	str_array = ft_calloc(get_word_count(s, c) + 1, sizeof(char *));
-	if (!str_arrays)
+	if (!str_array)
 		return (NULL);
 	var_init(&i, &j, &w_start);
 	while (s[i])
