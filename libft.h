@@ -6,7 +6,7 @@
 /*   By: orhernan <orhernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 12:29:42 by orhernan          #+#    #+#             */
-/*   Updated: 2025/10/19 22:27:51 by orhernan         ###   ########.fr       */
+/*   Updated: 2025/10/20 00:39:55 by orhernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ char		*ft_strjoin(const char *s1, const char *s2);
 size_t		ft_strlcat(char *dest, const char *src, size_t dstsize);
 size_t		ft_strlcpy(char *dest, const char *src, size_t dstsize);
 size_t		ft_strlen(const char *s);
+char		*ft_strmapi(const char *s, char (*f)(unsigned int, char));
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
 char		*ft_strnstr(const char *haystack, const char *needle, size_t n);
 char		*ft_strrchr(const char *s, int c);
