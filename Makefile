@@ -6,7 +6,7 @@
 #    By: orhernan <ohercelli@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/03 12:45:24 by orhernan          #+#    #+#              #
-#    Updated: 2025/10/20 22:51:56 by orhernan         ###   ########.fr        #
+#    Updated: 2025/10/21 00:08:09 by orhernan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,11 +22,11 @@ AR = ar
 # Archiver flags
 ARFLAGS = rcs
 
+# Include directory
+INC_DIR = .
+
 # Preprocessor flags
 CPPFLAGS = -I$(INC_DIR)
-
-# Include directory
-INC_DIR = . 
 
 # Detect operating system to select file deleting program
 ifeq ($(OS),Windows_NT)
@@ -48,11 +48,20 @@ SOURCES =	ft_atoi.c	ft_bzero.c	ft_calloc.c	ft_isalnum.c	\
 		ft_strnstr.c	ft_strrchr.c	ft_substr.c	ft_strtrim.c	\
 		ft_tolower.c	ft_toupper.c
 
+# Bonus Source files
+BONUS_SRCS = 	ft_lstnew_bonus.c
+
 # Name of the static library
 NAME = libft.a
 
 # Object files
 OBJECTS := $(SOURCES:%.c=%.o)
+
+# Bonus object files
+BONUS_OBJS := $(BONUS_SRCS:%.c=%.o)
+
+# All Objects + Bonus Objects
+ALL_OBJS = $(OBJECTS) $(BONUS_OBJS)
 
 # Header files
 HEADERS = libft.h
@@ -78,6 +87,10 @@ fclean: clean
 
 # Rebuild project
 re: fclean all
+
+# Target to build project with bonus functions
+bonus: $(ALL_OBJS)
+	$(AR) $(ARFLAGS) $(NAME) $(ALL_OBJS)
 
 # Phony targets
 .PHONY: all clean fclean re

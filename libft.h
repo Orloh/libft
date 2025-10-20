@@ -6,7 +6,7 @@
 /*   By: orhernan <orhernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 12:29:42 by orhernan          #+#    #+#             */
-/*   Updated: 2025/10/20 22:39:23 by orhernan         ###   ########.fr       */
+/*   Updated: 2025/10/21 00:04:45 by orhernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,13 @@
 # include <unistd.h>
 # include <stdlib.h>
 
+typedef struct	s_list
+{
+	void		*content;
+	struct s_list	*next;
+}			t_list;
+
+/* Required Functions */
 int			ft_atoi(const char *str);
 void		ft_bzero(void *ptr, size_t n);
 void		*ft_calloc(size_t count, size_t size);
@@ -50,5 +57,9 @@ char		*ft_strtrim(const char *s1, const char *set);
 char		*ft_substr(const char *s, unsigned int start, size_t len);
 int			ft_tolower(int c);
 int			ft_toupper(int c);
+
+/* Bonus Functions */
+
+t_list	*ft_lstnew(void *content);
 
 #endif
