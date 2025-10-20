@@ -6,7 +6,7 @@
 /*   By: orhernan <orhernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 12:29:42 by orhernan          #+#    #+#             */
-/*   Updated: 2025/10/20 00:39:55 by orhernan         ###   ########.fr       */
+/*   Updated: 2025/10/20 20:27:16 by orhernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void		*ft_memset(void *ptr, int c, size_t n);
 char		**ft_split(const char *s, char c);
 char		*ft_strchr(const char *s, int c);
 char		*ft_strdup(const char *s);
+void		ft_striteri(char *s, void (*f)(unsigned int, char *));
 char		*ft_strjoin(const char *s1, const char *s2);
 size_t		ft_strlcat(char *dest, const char *src, size_t dstsize);
 size_t		ft_strlcpy(char *dest, const char *src, size_t dstsize);
