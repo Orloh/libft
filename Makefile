@@ -6,7 +6,7 @@
 #    By: orhernan <ohercelli@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/03 12:45:24 by orhernan          #+#    #+#              #
-#    Updated: 2025/10/21 01:17:56 by orhernan         ###   ########.fr        #
+#    Updated: 2025/10/22 00:18:50 by orhernan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,9 @@ SOURCES =	ft_atoi.c	ft_bzero.c	ft_calloc.c	ft_isalnum.c	\
 		ft_tolower.c	ft_toupper.c
 
 # Bonus Source files
-BONUS_SRCS = 	ft_lstnew_bonus.c
+BONUS_SRCS =	ft_lstnew_bonus.c	ft_lstadd_front_bonus.c	ft_lstadd_back_bonus.c	\
+		ft_lstsize_bonus.c	ft_lstlast_bonus.c	ft_lstdelone_bonus.c	\
+		ft_lstclear_bonus.c	ft_lstiter_bonus.c	ft_lstmap_bonus.c	
 
 # Name of the static library
 NAME = libft.a
