@@ -81,7 +81,7 @@ all: $(NAME)
 
 # Clean up generated object files 
 clean:
-	$(RM) $(OBJECTS)
+	$(RM) $(ALL_OBJS)
 
 # Clean up object files and the library
 fclean: clean
