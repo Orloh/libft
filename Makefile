@@ -32,10 +32,64 @@ CPPFLAGS = -I$(INC_DIR)
 ifeq ($(OS),Windows_NT)
     # Windows: Use del /Q
     RM = del /Q
+    TARGET_EXTENSION = exe
 else
     # Linux/Unix: Use rm -f
     RM = rm -f
+    TARGET_EXTENSION = out
 endif
+
+PATHU = ./.tests/unity/src
+PATHS = ./
+PATHT = ./.tests/
+PATHB = ./build/
+PATHD = ./build/depends/
+PATHO = ./build/objs/
+PATHR = ./build/results/
+
+BUILD_PATHS = $(PATHB) $(PATHD) $(PATHO) $(PATHR)
+
+# Testing Toolchain
+COMPILE = gcc -c
+LINK = gcc
+DEPEND = gcc -MM -MG -MF
+TEST_CFLAGS = -I$(INC_DIR) -I$(PATHU) -I$(PATHS) -DTEST
+
+# Test Source files
+SRC_TEST = $(wildcard $(PATHT)*.c)
+
+# Results Summary
+test: $(BUILD_PATHS) $(RESULTS)
+	@echo "---\nIGNORES: \n---"
+	@echo `grep -s IGNORE $(PATHR)*.txt`
+	@echo "---\nIGNORES: \n---"
+	@echo `grep -s FAIL $(PATHR)*.txt`
+	@echo "\nDONE"
+
+# Creating Results
+RESULTS = $(patsubst $(PATHT)test_%.c, $(PATHR)test_%.txt, $(SRCT))
+
+# Pipes the stderror and stdout to a result text file of the performed test
+$(PATHR)%.txt: $(PATHB).$(TARGET_EXTENSION)
+	-./$< > $@ 2>&1
+
+# Creating Executables
+$(PATHB)test_%.$(TARGET_EXTENSION): $(PATHO)test_%.o $(PATHO).o $(PATHO)unity.o $(PATHD)Test%.d
+	$(LINK) -o $@ $^
+
+# Creating Object Files
+$(PATHO)%.o::$(PATHT)%.c
+	$(COMPILE) $(TEST_CFLAGS) $< -o $@
+
+$(PATHO)%.o::$(PATHS)%.c
+	$(COMPILE) $(TEST_CFLAGS) $< -o $@
+
+$(PATHO)%.o::$(PATHU)%.c $(PATHU)%.h
+	$(COMPILE) $(TEST_CFLAGS) $< -o $@
+
+# Creating Dependencies
+$(PATHD)%.d::$(PATHT)%.c
+	$(DEPEND) $@ $<
 
 # Source files
 SOURCES =	ft_atoi.c	ft_bzero.c	ft_calloc.c	ft_isalnum.c	\
