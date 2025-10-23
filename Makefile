@@ -33,19 +33,23 @@ ifeq ($(OS),Windows_NT)
     # Windows: Use del /Q
     RM = del /Q
     TARGET_EXTENSION = exe
+    define MKDIR_CMD
+    @if not exist "$(1)" mkdir "$(1)"
+    endef
 else
     # Linux/Unix: Use rm -f
     RM = rm -f
+    MKDIR = mkdir -p
     TARGET_EXTENSION = out
 endif
 
-PATHU = ./.tests/unity/src
-PATHS = ./
-PATHT = ./.tests/
-PATHB = ./build/
-PATHD = ./build/depends/
-PATHO = ./build/objs/
-PATHR = ./build/results/
+PATHU = .tests/unity/src
+PATHS = .
+PATHT = .tests/
+PATHB = build/
+PATHD = build/depends/
+PATHO = build/objs/
+PATHR = build/results/
 
 BUILD_PATHS = $(PATHB) $(PATHD) $(PATHO) $(PATHR)
 
@@ -90,6 +94,31 @@ $(PATHO)%.o::$(PATHU)%.c $(PATHU)%.h
 # Creating Dependencies
 $(PATHD)%.d::$(PATHT)%.c
 	$(DEPEND) $@ $<
+
+# Automate Directories Creation
+$(PATHB):
+	$(MKDIR) $(PATHB)
+
+$(PATHD):
+	$(MKDIR) $(PATHD)
+
+$(PATHO):
+	$(MKDIR) $(PATHO)
+
+$(PATHR):
+	$(MKDIR) $(PATHR)
+
+# Test Cleanup
+tclean:
+	$(RM) $(PATHO)*.o
+	$(RM) $(PATHB)*.$(TARGET_EXTENSION)
+	$(RM) $(PATHR)*.txt
+
+# Keep these files
+.PRECIOUS: $(PATHB)test_%.$(TARGET_EXTENSION)
+.PRECIOUS: $(PATHD)%.d
+.PRECIOUS: $(PATHO)%.o
+.PRECIOUS: $(PATHR)%.txt
 
 # Source files
 SOURCES =	ft_atoi.c	ft_bzero.c	ft_calloc.c	ft_isalnum.c	\
@@ -149,4 +178,4 @@ bonus: $(ALL_OBJS)
 	$(AR) $(ARFLAGS) $(NAME) $(ALL_OBJS)
 
 # Phony targets
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re tclean test
