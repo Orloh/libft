@@ -6,11 +6,12 @@
 /*   By: orhernan <ohercelli@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 21:41:52 by orhernan          #+#    #+#             */
-/*   Updated: 2025/10/19 00:59:53 by orhernan         ###   ########.fr       */
+/*   Updated: 2025/10/24 13:15:11 by orhernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
 static int	get_word_count(const char *s, char c)
 {
@@ -61,11 +62,12 @@ char	**ft_split(const char *s, char c)
 	int		w_start;
 	int		j;
 
+	printf("assignando array\n");
 	str_array = ft_calloc(get_word_count(s, c) + 1, sizeof(char *));
 	if (!str_array)
 		return (NULL);
 	var_init(&i, &j, &w_start);
-	while (s[i])
+	while (i <= ft_strlen(s))
 	{
 		if (s[i] != c && w_start == -1)
 			w_start = i;

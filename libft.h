@@ -6,7 +6,7 @@
 /*   By: orhernan <orhernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 12:29:42 by orhernan          #+#    #+#             */
-/*   Updated: 2025/10/22 00:32:28 by orhernan         ###   ########.fr       */
+/*   Updated: 2025/10/24 11:34:28 by orhernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 
 typedef struct s_list
 {
-	void		*content;
+	void			*content;
 	struct s_list	*next;
-}			t_list;
+}					t_list;
 
 /* Required Functions */
 int			ft_atoi(const char *str);
