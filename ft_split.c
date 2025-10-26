@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
 static int	get_word_count(const char *s, char c)
 {
@@ -62,7 +61,6 @@ char	**ft_split(const char *s, char c)
 	int		w_start;
 	int		j;
 
-	printf("assignando array\n");
 	str_array = ft_calloc(get_word_count(s, c) + 1, sizeof(char *));
 	if (!str_array)
 		return (NULL);
@@ -71,7 +69,7 @@ char	**ft_split(const char *s, char c)
 	{
 		if (s[i] != c && w_start == -1)
 			w_start = i;
-		else if ((s[i] == c || i == ft_strlen(s)) && w_start >= 0)
+		else if ((s[i] == c || s[i] == '\0') && w_start >= 0)
 		{
 			str_array[j] = ft_substr(s, w_start, i - w_start);
 			if (!str_array[j])

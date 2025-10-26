@@ -23,10 +23,10 @@ AR = ar
 ARFLAGS = rcs
 
 # Include directory
-INC_DIR = .
+ROOT = .
 
 # Preprocessor flags
-CPPFLAGS = -I$(INC_DIR)
+CPPFLAGS = -I$(ROOT)
 
 # Detect operating system to select file deleting program
 ifeq ($(OS),Windows_NT)
@@ -70,7 +70,7 @@ HEADERS = libft.h
 
 # Compilation rule for object files
 %.o: %.c $(HEADERS) 
-	$(CC) -ggdb -O0  $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+	$(CC) -ggdb -O0 $(CFLAGS) $(CPPFLAGS) -c $< -o $@
 
 # Build rule
 $(NAME): $(OBJECTS)
@@ -93,6 +93,10 @@ re: fclean all
 # Target to build project with bonus functions
 bonus: $(ALL_OBJS)
 	$(AR) $(ARFLAGS) $(NAME) $(ALL_OBJS)
+
+# Debugging
+debug:
+	$(CC) main.c -o main.exe -ggdb -I$(ROOT) -L$(ROOT) -l:libft.a
 
 # Phony targets
 .PHONY: all clean fclean re tclean test
