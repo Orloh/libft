@@ -16,24 +16,29 @@ endif
 .PHONY: clean
 .PHONY: test
 
-PATHU = unity/src/
+PATHU = ./unity/src/
 PATHS = ../
-PATHT = .
-PATHB = ../build/
-PATHD = ../build/depends/
-PATHO = ../build/objs/
-PATHR = ../build/results/
+PATHT = ./
+PATHB = ./build/
+PATHL = ./build/lib/
+PATHO = ./build/objs/
+PATHR = ./build/results/
 
-BUILD_PATHS = $(PATHB) $(PATHD) $(PATHO) $(PATHR)
+BUILD_PATHS = $(PATHB) $(PATHD) $(PATHO) $(PATHR) $(PATHL)
 
 SRCT = $(wildcard $(PATHT)*.c)
+SRCS = $(filter-out $(PATHS)main.c, $(wildcard $(PATHS)*.c))
 
 COMPILE=gcc -c
 LINK=gcc
 DEPEND=gcc -MM -MG -MF
 CFLAGS=-I. -I$(PATHU) -I$(PATHS) -DTEST
+AR = ar rcs
 
-RESULTS = $(patsubst $(PATHT)Test%.c,$(PATHR)Test%.txt,$(SRCT) )
+LIBFT = $(PATHL)libft.a
+OBJSS = $(patsubst $(PATHS)%.c,$(PATHO)%.o,$(SRCS)) 
+
+RESULTS = $(patsubst $(PATHT)test_%.c,$(PATHR)test_%.txt,$(SRCT))
 
 PASSED = `grep -s PASS $(PATHR)*.txt`
 FAIL = `grep -s FAIL $(PATHR)*.txt`
@@ -48,11 +53,15 @@ test: $(BUILD_PATHS) $(RESULTS)
 	@echo "$(PASSED)"
 	@echo "\nDONE"
 
+print-vars:
+	@echo "SRCS: $(SRCS)"
+	@echo "OBJSS: $(OBJSS)"
+
 $(PATHR)%.txt: $(PATHB)%.$(TARGET_EXTENSION)
 	-./$< > $@ 2>&1
 
-$(PATHB)Test%.$(TARGET_EXTENSION): $(PATHO)Test%.o $(PATHO)%.o $(PATHO)unity.o #$(PATHD)Test%.d
-	$(LINK) -o $@ $^
+$(PATHB)test_%.$(TARGET_EXTENSION): $(PATHO)test_%.o $(PATHO)%.o $(PATHO)unity.o $(LIBFT)
+	$(LINK) -o $@ $(PATHO)test_%.o $(PATHO)%.o $(PATHO)unity.o $(LIBFT)
 
 $(PATHO)%.o:: $(PATHT)%.c
 	$(COMPILE) $(CFLAGS) $< -o $@
@@ -66,6 +75,12 @@ $(PATHO)%.o:: $(PATHU)%.c $(PATHU)%.h
 $(PATHD)%.d:: $(PATHT)%.c
 	$(DEPEND) $@ $<
 
+$(PATHD)%.d:: $(PATHS)%.c
+	$(DEPEND) $@ $<
+
+$(LIBFT): $(OBJSS)
+	$(AR) $@ $<
+
 $(PATHB):
 	$(MKDIR) $(PATHB)
 
@@ -78,12 +93,17 @@ $(PATHO):
 $(PATHR):
 	$(MKDIR) $(PATHR)
 
+$(PATHL):
+	$(MKDIR) $(PATHL)
+
 clean:
 	$(CLEANUP) $(PATHO)*.o
 	$(CLEANUP) $(PATHB)*.$(TARGET_EXTENSION)
 	$(CLEANUP) $(PATHR)*.txt
+	$(CLEANUP) $(LIBFT)
 
-.PRECIOUS: $(PATHB)Test%.$(TARGET_EXTENSION)
+.PRECIOUS: $(PATHB)test_%.$(TARGET_EXTENSION)
 .PRECIOUS: $(PATHD)%.d
 .PRECIOUS: $(PATHO)%.o
 .PRECIOUS: $(PATHR)%.txt
+.PRECIOUS: $(LIBFT)
